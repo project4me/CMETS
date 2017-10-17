@@ -13,7 +13,7 @@ class TourController extends Controller
      */
     public function index()
     {
-        return view('admin.tours');
+        return view('admin.tour.list');
     }
 
     /**
