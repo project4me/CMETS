@@ -16,7 +16,9 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('admin.contacts.list');
+        $contacts = Contact::latest()->paginate(10);
+
+        return view('admin.contacts.list', ['contacts' => $contacts]);
     }
 
     /**
@@ -43,7 +45,7 @@ class ContactController extends Controller
         $contact->message = $request->input('message');
         $contact->save();
 
-        return redirect()->back()->with('alert', 'Message sent successfully.');
+        return back()->with('alert', 'Message sent successfully.');
     }
 
     /**
@@ -54,7 +56,9 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        //
+        $contact = Contact::find($id);
+
+        return view('admin.contacts.answer', ['contact' => $contact]);
     }
 
     /**
@@ -77,7 +81,12 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Contact::find($id)->update([
+            'answer' => $request->input('answer'),
+            'status' => 2
+        ]);
+
+        return back()->with('alert', 'Mail sent successfully');
     }
 
     /**

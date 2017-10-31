@@ -18,6 +18,7 @@ class CreateContactsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('subject');
             $table->text('message');
+            $table->text('answer');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

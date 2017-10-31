@@ -47,7 +47,8 @@
         </div>
         @endif
         <form class="form form-contact" action="/admin/contacts" method="post">
-        {{ csrf_field() }}<label for="subject" class="sr-only">Subject</label>
+            {{ csrf_field() }}
+            <label for="subject" class="sr-only">Subject</label>
             <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" required>
             <label for="message" class="sr-only">Message</label>
             <textarea id="message" name="message" class="form-control" placeholder="Message" required></textarea>

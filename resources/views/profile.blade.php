@@ -22,12 +22,12 @@
             {{ csrf_field() }}
             <div class="form-row">
                 <div class="form-group col-md-6">
-                <label for="email" class="sr-only">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" value="{{ Auth::user()->email }}" readonly>
+                    <label for="email" class="sr-only">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Email" value="{{ Auth::user()->email }}" readonly>
                 </div>
                 <div class="form-group col-md-6">
-                <label for="name" class="sr-only">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ Auth::user()->name }}" required>
+                    <label for="name" class="sr-only">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ Auth::user()->name }}" required>
                 </div>
             </div>
             <div class="form-group">

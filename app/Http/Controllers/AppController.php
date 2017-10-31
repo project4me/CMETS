@@ -20,7 +20,7 @@ class AppController extends Controller
 
             return redirect('/');
         }
-        return redirect()->back()->with('error', 'Email and password do not match.');
+        return back()->with('error', 'Email and password do not match.');
     }
 
     public function signup(Request $request) {
@@ -32,7 +32,7 @@ class AppController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()
+            return back()
                       ->withErrors($validator)
                       ->withInput();
         }
@@ -51,7 +51,7 @@ class AppController extends Controller
     public function profile(Request $request) {
         Auth::user()->update($request->all());
 
-        return redirect()->back()->with('alert', 'Updated successfully.');
+        return back()->with('alert', 'Updated successfully.');
     }
 
     public function signout() {
@@ -63,9 +63,10 @@ class AppController extends Controller
     public function contact() {
         /* $content = [
             'subject'=> $request->input('subject'), 
-            'message'=> $request->input('message')
+            'message'=> $request->input('message'),
+            'answer' => $request->input('answer')
         ];
-        Mail::to($request->input('email'))->send(new Contact($content));
+        Mail::to($request->input('email'))->send(new ContactReply($content));
 
         dd('mail send successfully'); */
         if (Auth::check()) {
