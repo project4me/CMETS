@@ -1,0 +1,1 @@
+{{ Thoeng::setting() }}

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use App\Contact;
+
 class ContactController extends Controller
 {
     /**
@@ -13,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('admin.contact.list');
+        return view('admin.contacts.list');
     }
 
     /**
@@ -34,7 +37,13 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $contact = new Contact;
+        $contact->user_id = Auth::user()->id;
+        $contact->subject = $request->input('subject');
+        $contact->message = $request->input('message');
+        $contact->save();
+
+        return redirect()->back()->with('alert', 'Message sent successfully.');
     }
 
     /**

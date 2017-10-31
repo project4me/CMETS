@@ -4,6 +4,11 @@ body {
   background-image: url("/images/a_stacked_circles.png");
 }
 
+/* Customize breadcrumb */
+.breadcrumb {
+  padding: 0.5rem 0.75rem;
+}
+
 /* Customize container */
 @media (min-width: 48em) {
   .container {
@@ -70,9 +75,10 @@ body {
   /*background-image: -webkit-gradient(linear, left top, left bottom, from(#0086b3),to(#0099cc));
   background-image: -webkit-linear-gradient(top, #0086b3 0%, #0099cc 100%);
   background-image: -o-linear-gradient(top, #0086b3 0%, #0099cc 100%);
-  background-image: linear-gradient(to bottom, #0086b3 0%, #0099cc 100%);*/
-  /*border: 1px solid #e5e5e5;*/
-  background: #0099cc url("/images/grad_menu.png") top left repeat-x;
+  background-image: linear-gradient(to bottom, #0086b3 0%, #0099cc 100%);
+  border: 1px solid #e5e5e5;
+  background: #0099cc url("/images/grad_menu.png") top left repeat-x; */
+  background-color: #05a7ed;
   padding: 0;
 }
 
@@ -103,18 +109,22 @@ body {
   }
 }
 
-.form-signin, .form-signup {
+.form-control {
+  border: 1px solid #ced4da;
+}
+
+.form {
   max-width: 330px;
   padding: 15px;
   margin: 0 auto;
 }
-.form-signin .checkbox, .form-signup .checkbox {
+.form .checkbox {
   margin-bottom: 10px;
 }
-.form-signin .checkbox, .form-signup .checkbox {
+.form .checkbox {
   font-weight: normal;
 }
-.form-signin .form-control, .form-signup .form-control {
+.form .form-control {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -122,10 +132,10 @@ body {
   padding: 10px;
   font-size: 16px;
 }
-.form-signin .form-control:focus, .form-signup .form-control:focus {
+.form .form-control:focus {
   z-index: 2;
 }
-.form-signup input[id="name"] {
+.form-signin input[type="email"], .form-signup input[id="name"], .form-contact input[type="text"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
@@ -134,12 +144,7 @@ body {
   margin-bottom: -1px;
   border-radius: 0;
 }
-.form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-.form-signin input[type="password"], .form-signup input[type="password"] {
+.form-signin input[type="password"], .form-signup input[type="password"], .form-contact textarea {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;

@@ -5,3 +5,7 @@
 @section('content')
 Dashboard
 @endsection
+
+@section('scripts')
+
+@endsection

@@ -4,59 +4,75 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Mail\ContactReply;
+use Mail;
+
 use Auth;
 use Validator;
 use App\User;
+use App\Contact;
 
 class AppController extends Controller
 {
     public function signin(Request $request) {
-      $remember = $request->has('remember') ? true : false;
-      if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember)) {
+        $remember = $request->has('remember') ? true : false;
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember)) {
 
-        return redirect('/');
-      }
-      return redirect()->back()->with('error', 'Email and password do not match.');
+            return redirect('/');
+        }
+        return redirect()->back()->with('error', 'Email and password do not match.');
     }
 
     public function signup(Request $request) {
-      $validator = Validator::make($request->all(), [
-        'email' => 'unique:users',
-      ],
-      [
-        'unique' => 'The :attribute has already been taken.',
-      ]);
+        $validator = Validator::make($request->all(), [
+            'email' => 'unique:users',
+        ],
+        [
+            'unique' => 'The :attribute has already been taken.',
+        ]);
 
-      if ($validator->fails()) {
-        return redirect()->back()
-                    ->withErrors($validator)
-                    ->withInput();
-      }
+        if ($validator->fails()) {
+            return redirect()->back()
+                      ->withErrors($validator)
+                      ->withInput();
+        }
 
-      $user = new User;
-      $user->name = $request->name;
-      $user->email = $request->email;
-      $user->password = bcrypt($request->password);
-      $user->save();
+        $user = new User;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
 
-      Auth::login($user);
+        Auth::login($user);
 
-      return redirect('/');
+        return redirect('/');
     }
 
-    public function signout() { /* */
-      Auth::logout();
+    public function profile(Request $request) {
+        Auth::user()->update($request->all());
 
-      return redirect('/');
+        return redirect()->back()->with('alert', 'Updated successfully.');
     }
 
-    public function dashboard() {
+    public function signout() {
+        Auth::logout();
 
-      return view('admin.dashboard');
+        return redirect('/');
     }
 
-    public function about() {
-      
-      return view('admin.about');
+    public function contact() {
+        /* $content = [
+            'subject'=> $request->input('subject'), 
+            'message'=> $request->input('message')
+        ];
+        Mail::to($request->input('email'))->send(new Contact($content));
+
+        dd('mail send successfully'); */
+        if (Auth::check()) {
+            $contacts = Contact::where('user_id', Auth::user()->id)->orderBy('status', 'DESC')->paginate(5);
+        } else {
+            $contacts = array();
+        }
+        return view('contact', ['contacts' => $contacts]);
     }
 }

@@ -1,0 +1,14 @@
+{
+    "name": "cmets/thoeng",
+    "description": "This is mt first package",
+    "type": "laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thoeng",
+            "email": "little_phantom_4@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
